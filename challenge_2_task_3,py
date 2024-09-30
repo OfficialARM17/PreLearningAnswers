@@ -1,0 +1,59 @@
+# Challenge 2 #
+# Task 3 #
+import random
+import string
+
+def reverse_name(name):
+  return name[::-1]
+
+def intersperse_name(reversed_name, surname):
+  interspersed = ''.join(a + b for a, b in zip(reversed_name, surname))
+  interspersed += reversed_name[len(surname):] + surname[len(reversed_name):]
+  return interspersed
+
+def format_name(intersperse_name):
+  split = len(intersperse_name) // 2
+  first_half = intersperse_name[:split].capitalize()
+  second_half = intersperse_name[split:].capitalize()
+  return f"{first_half} {second_half}"
+
+def generate_random_username():
+    characters = string.ascii_letters + string.digits
+    random_username = ''.join(random.choice(characters) for _ in range(10))
+    split = len(random_username) // 2
+    first_half = random_username[:split].capitalize()
+    second_half = random_username[split:].capitalize()
+    return f"{first_half} {second_half}"
+
+def create_username():
+    first_name = input("Enter your first name: ")
+    surname = input("Enter your surname: ")
+
+    reversed_first_name = reverse_name(first_name)
+    interspersed_name = intersperse_name(reversed_first_name, surname)
+    formatted_name = format_name(interspersed_name)
+
+    print(f"Your username is {formatted_name}")
+
+def main_menu():
+    while True:
+        print("Welcome to the username creator...")
+        print("Please choose one of the following options:")
+        print("1. Create a username based on a name")
+        print("2. Generate a random username")
+        print("3. Exit")
+        choice = input("Enter your choice here: ")
+
+        if choice == "1":
+            create_username()
+        elif choice == "2":
+            random_username = generate_random_username()
+            print(f"Your random username is: {random_username}")
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice, please choose again.")
+
+# Start the program
+main_menu()

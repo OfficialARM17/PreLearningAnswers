@@ -2,21 +2,19 @@
 # Task 3 #
 import random
 import string
-
 def reverse_name(name):
   return name[::-1]
-
+# Method to intersperse a name #
 def intersperse_name(reversed_name, surname):
-  interspersed = ''.join(a + b for a, b in zip(reversed_name, surname))
-  interspersed += reversed_name[len(surname):] + surname[len(reversed_name):]
-  return interspersed
-
+  interspersed_name = ''.join(a + b for a, b in zip(reversed_name, surname))
+  interspersed_name += reversed_name[len(surname):] + surname[len(reversed_name):]
+  return interspersed_name
+# Method to format the name as desired #
 def format_name(intersperse_name):
-  split = len(intersperse_name) // 2
-  first_half = intersperse_name[:split].capitalize()
-  second_half = intersperse_name[split:].capitalize()
+  mid = len(intersperse_name) // 2
+  first_half = intersperse_name[:mid].capitalize()
+  second_half = intersperse_name[mid:].capitalize()
   return f"{first_half} {second_half}"
-
 def generate_random_username():
     characters = string.ascii_letters + string.digits
     random_username = ''.join(random.choice(characters) for _ in range(10))
@@ -24,17 +22,13 @@ def generate_random_username():
     first_half = random_username[:split].capitalize()
     second_half = random_username[split:].capitalize()
     return f"{first_half} {second_half}"
-
 def create_username():
     first_name = input("Enter your first name: ")
     surname = input("Enter your surname: ")
-
     reversed_first_name = reverse_name(first_name)
     interspersed_name = intersperse_name(reversed_first_name, surname)
     formatted_name = format_name(interspersed_name)
-
     print(f"Your username is {formatted_name}")
-
 def main_menu():
     while True:
         print("Welcome to the username creator...")
@@ -43,7 +37,6 @@ def main_menu():
         print("2. Generate a random username")
         print("3. Exit")
         choice = input("Enter your choice here: ")
-
         if choice == "1":
             create_username()
         elif choice == "2":
@@ -54,6 +47,5 @@ def main_menu():
             break
         else:
             print("Invalid choice, please choose again.")
-
 # Start the program
 main_menu()
